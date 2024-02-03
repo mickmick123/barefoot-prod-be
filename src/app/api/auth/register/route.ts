@@ -26,7 +26,7 @@ export async function POST(request: Request) {
                     lastName: body.lastName.toLowerCase(),
                 },
               },
-              location: {
+              coords: {
                 create: {
                     latitude: body.latitude,
                     longitude: body.longitude,

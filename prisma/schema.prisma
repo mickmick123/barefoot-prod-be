@@ -41,6 +41,15 @@ model Location {
  locId  Int @unique
 }
 
+model Coords {
+ id     Int     @id @default(autoincrement())
+ latitude   String?
+ longitude  String?
+ user   User    @relation(fields: [locId], references: [id])
+ locId  Int @unique
+}
+
+
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
@@ -48,4 +57,5 @@ model User {
   posts   Post[]
   profile Profile?
   location Location?
+  coords    Coords?
 }

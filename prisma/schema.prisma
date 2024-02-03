@@ -25,8 +25,19 @@ model Profile {
   id     Int     @id @default(autoincrement())
   fistName    String
   lastName    String
+  gender    String?
+  address   String?
+  status    String?
   user   User    @relation(fields: [userId], references: [id])
   userId Int     @unique
+}
+
+model Location {
+ id     Int     @id @default(autoincrement())
+ latitude   String?
+ longitude  String?
+ locId  Int @unique
+ location   User    @relation(fields: [locId], references: [id])
 }
 
 model User {
@@ -35,4 +46,5 @@ model User {
   password String
   posts   Post[]
   profile Profile?
+  location Location?
 }

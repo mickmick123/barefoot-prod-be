@@ -23,8 +23,9 @@ model Post {
 
 model Profile {
   id     Int     @id @default(autoincrement())
-  fistName    String
+  firstName    String
   lastName    String
+  middleName    String?
   gender    String?
   address   String?
   status    String?

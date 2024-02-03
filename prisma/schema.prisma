@@ -33,12 +33,12 @@ model Profile {
   userId Int     @unique
 }
 
-model Location {
+model userLocation {
  id     Int     @id @default(autoincrement())
  latitude   String?
  longitude  String?
+ userLocation   User    @relation(fields: [locId], references: [id])
  locId  Int @unique
- location   User    @relation(fields: [locId], references: [id])
 }
 
 model User {
@@ -47,5 +47,5 @@ model User {
   password String
   posts   Post[]
   profile Profile?
-  location Location?
+  userLocation userLocation?
 }

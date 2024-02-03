@@ -22,16 +22,16 @@ export async function POST(request: Request) {
               password: ps,
               profile: {
                 create: {
-                    firstName: body.firstName,
-                    lastName: body.lastName,
+                    firstName: body.firstName.toLowerCase(),
+                    lastName: body.lastName.toLowerCase(),
                 },
               },
-            //   location: {
-            //     create: {
-            //         latitude: body.latitude,
-            //         longitude: body.longitude,
-            //     }
-            //   }
+              userLocation: {
+                create: {
+                    latitude: body.latitude,
+                    longitude: body.longitude,
+                }
+              }
             },
           })
         return new Response(JSON.stringify({status: 'success'}));

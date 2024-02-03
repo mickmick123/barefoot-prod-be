@@ -20,11 +20,11 @@ export async function POST(request: Request) {
             data: {
                 email: body.email,
                 password: ps,
+                coords: JSON.stringify({latitude: body.latitude, longitude: body.longitude}),
                 profile: {
                     create: {
                         firstName: body.firstName.toLowerCase(),
                         lastName: body.lastName.toLowerCase(),
-                        coords: JSON.stringify({latitude: body.latitude, longitude: body.longitude})
                     },
                 },
 

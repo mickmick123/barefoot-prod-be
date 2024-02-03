@@ -15,8 +15,7 @@ export async function POST(request: Request) {
     },
     include: {
       posts: true,
-      profile: true,
-      location: true
+      profile: true
     },
   });
 

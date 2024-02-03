@@ -30,16 +30,7 @@ model Profile {
   address   String?
   status    String?
   user   User    @relation(fields: [userId], references: [id])
-  coords Coords?
   userId Int     @unique
-}
-
-model Coords {
- id     Int     @id @default(autoincrement())
- latitude   String?
- longitude  String?
- profile   Profile    @relation(fields: [locId], references: [id])
- locId  Int @unique
 }
 
 
@@ -47,6 +38,7 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   password String
+  coords String
   posts   Post[]
   profile Profile?
 }

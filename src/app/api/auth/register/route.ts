@@ -1,5 +1,6 @@
-import prisma from "@/lib/prisma";
+import { PrismaClient } from '@prisma/client'
 import * as bcrypt from "bcrypt";
+const prisma = new PrismaClient()
 
 interface RequestBody {
   firstName: string;
@@ -15,27 +16,25 @@ export async function POST(request: Request) {
    
     try {
         const ps = await bcrypt.hash(body.password, 10)
-        bcrypt.hash(body.password, 10, async function(err, hash) {
-            await prisma.user.create({
-                data: {
-                  email: body.email,
-                  password: hash,
-                  profile: {
-                    create: {
-                        firstName: body.firstName,
-                        lastName: body.lastName,
-                    },
-                  },
-                  location: {
-                    create: {
-                        latitude: body.latitude,
-                        longitude: body.longitude,
-                    }
-                  }
+        await prisma.user.create({
+            data: {
+              email: body.email,
+              password: ps,
+              profile: {
+                create: {
+                    firstName: body.firstName,
+                    lastName: body.lastName,
                 },
-              })
-        })
-        return new Response(JSON.stringify({status: 'success', data: JSON.stringify(ps), body: JSON.stringify(body)}));
+              },
+              location: {
+                create: {
+                    latitude: body.latitude,
+                    longitude: body.longitude,
+                }
+              }
+            },
+          })
+        return new Response(JSON.stringify({status: 'success'}));
     } catch (error) {
         return new Response(JSON.stringify({status: 'failed', message: JSON.stringify(error)}));
     }

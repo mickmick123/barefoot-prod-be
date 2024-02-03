@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const body: RequestBody = await request.json();
    
     try {
-        const ps = bcrypt.hash(body.password, 10)
+        const ps = await bcrypt.hash(body.password, 10)
         bcrypt.hash(body.password, 10, async function(err, hash) {
             await prisma.user.create({
                 data: {
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
                 },
               })
         })
-        return new Response(JSON.stringify({status: 'success', data: JSON.stringify(ps)}));
+        return new Response(JSON.stringify({status: 'success', data: JSON.stringify(ps), body: JSON.stringify(body)}));
     } catch (error) {
         return new Response(JSON.stringify({status: 'failed', message: JSON.stringify(error)}));
     }
